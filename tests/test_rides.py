@@ -70,3 +70,12 @@ def test_overlapping_rides_detected():  # TC-Ride-07
     assert has_overlapping_ride([d], d + timedelta(minutes=30))
     assert not has_overlapping_ride([d], d + timedelta(hours=1))  # back-to-back is fine
     assert not has_overlapping_ride([], d)
+
+def test_offer_route_points_must_be_inside_service_area():
+    with pytest.raises(ValidationError):
+        offer(route=[A, GeoPoint(28.6, 77.2), B])
+
+
+def test_request_with_window_starting_in_the_past_is_rejected():
+    with pytest.raises(ValidationError):
+        create_request("r1", "u1", A, B, NOW - timedelta(hours=1), NOW + timedelta(hours=1), 1, NOW)
