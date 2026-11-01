@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}My rides - CampusRide{% endblock %}
+{% block content %}
+<h1>My rides</h1>
+
+<h2>As a rider</h2>
+{% if as_rider %}
+<div class="scroll"><table>
+  <tr><th>Ride</th><th>Departs</th><th>Seats</th><th>Status</th><th>Actions</th></tr>
+  {% for b in as_rider %}{% set o = offers[b.offer_id] %}
+  <tr>
+    <td>{{ pname(o.origin) }} &rarr; {{ pname(o.destination) }}<br><span class="muted">Driver: {{ name_of(b.driver_id) }}</span></td>
+    <td>{{ b.departure|dt }}</td><td>{{ b.seats }}</td><td><span class="badge">{{ b.status.value }}</span></td>
+    <td>
+      <a href="{{ url_for('chat_view', booking_id=b.id) }}">Chat</a>
+      {% if b.status in (BookingStatus.PENDING, BookingStatus.CONFIRMED) %}
+      <form method="post" action="{{ url_for('cancel', booking_id=b.id) }}" class="inline">
+        <input type="hidden" name="csrf" value="{{ csrf() }}"><input name="reason" placeholder="Reason" required><button class="danger" type="submit">Cancel</button>
+      </form>
+      {% elif b.status == BookingStatus.COMPLETED %}<a href="{{ url_for('history') }}">Rate</a>{% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table></div>
+{% else %}<div class="card muted">No bookings yet. <a href="{{ url_for('request_new') }}">Find a ride</a>.</div>{% endif %}
+
+{% if my_requests %}
+<h2>My requests</h2>
+<div class="scroll"><table>
+  <tr><th>Trip</th><th>Window</th><th></th></tr>
+  {% for r in my_requests %}
+  <tr><td>{{ pname(r.pickup) }} &rarr; {{ pname(r.drop) }}</td><td>{{ r.earliest|dt }} to {{ r.latest|dt }}</td>
+      <td><a href="{{ url_for('matches', request_id=r.id) }}">See matches</a></td></tr>
+  {% endfor %}
+</table></div>
+{% endif %}
+
+<h2>As a driver</h2>
+{% if offer_rows %}
+  {% for o, bks in offer_rows %}
+  <div class="card">
+    <b>{{ pname(o.origin) }} &rarr; {{ pname(o.destination) }}</b> &middot; {{ o.departure|dt }}
+    <span class="badge">{{ o.status.value }}</span>
+    <span class="muted">{{ o.seats_available }}/{{ o.seats_total }} seats free</span>
+    {% if o.status.value in ('OPEN', 'FULL') %}
+      <form method="post" action="{{ url_for('start', offer_id=o.id) }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf() }}"><button class="secondary" type="submit">Start ride</button></form>
+    {% elif o.status.value == 'STARTED' %}
+      <form method="post" action="{{ url_for('complete', offer_id=o.id) }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf() }}"><button type="submit">Complete ride</button></form>
+    {% endif %}
+    {% if bks %}
+    <table style="margin-top:10px">
+      <tr><th>Rider</th><th>Seats</th><th>Status</th><th>Actions</th></tr>
+      {% for b in bks %}
+      <tr><td>{{ name_of(b.rider_id) }}</td><td>{{ b.seats }}</td><td><span class="badge">{{ b.status.value }}</span></td>
+        <td>
+          <a href="{{ url_for('chat_view', booking_id=b.id) }}">Chat</a>
+          {% if b.status == BookingStatus.PENDING %}
+            <form method="post" action="{{ url_for('accept', booking_id=b.id) }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf() }}"><button type="submit">Accept</button></form>
+            <form method="post" action="{{ url_for('reject', booking_id=b.id) }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf() }}"><button class="secondary" type="submit">Reject</button></form>
+          {% endif %}
+          {% if b.status in (BookingStatus.PENDING, BookingStatus.CONFIRMED) %}
+            <form method="post" action="{{ url_for('cancel', booking_id=b.id) }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf() }}"><input name="reason" placeholder="Reason" required><button class="danger" type="submit">Cancel</button></form>
+          {% endif %}
+        </td></tr>
+      {% endfor %}
+    </table>
+    {% else %}<p class="muted">No join requests yet.</p>{% endif %}
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="card muted">You have not posted a ride. <a href="{{ url_for('offer_new') }}">Offer a ride</a>.</div>
+{% endif %}
+{% endblock %}

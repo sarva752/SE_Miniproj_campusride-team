@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Matches - CampusRide{% endblock %}
+{% block content %}
+<h1>Matches for your request</h1>
+<div class="card">
+  {{ pname(req.pickup) }} &rarr; {{ pname(req.drop) }} &middot; {{ req.earliest|dt }} to {{ req.latest|dt }} &middot; {{ req.seats_needed }} seat(s)
+  <form method="get" class="inline" style="margin-top:10px; flex-wrap:wrap">
+    <label class="check">Sort
+      <select name="sort">
+        {% for key in ('score', 'departure', 'detour', 'seats') %}<option value="{{ key }}" {{ 'selected' if key == sort_key }}>{{ key }}</option>{% endfor %}
+      </select></label>
+    <label class="check">Min rating <input name="min_rating" type="number" step="0.1" min="0" max="5" value="{{ args.get('min_rating', '') }}" style="width:80px"></label>
+    <label class="check">Max detour (m) <input name="max_detour" type="number" min="0" value="{{ args.get('max_detour', '') }}" style="width:100px"></label>
+    <button class="secondary" type="submit">Apply</button>
+  </form>
+</div>
+{% if found %}
+<div class="scroll"><table>
+  <tr><th>Driver</th><th>Rating</th><th>Route</th><th>Departs</th><th>Seats left</th><th>Detour</th><th>Score</th><th></th></tr>
+  {% for m in found %}
+  <tr>
+    <td>{{ name_of(m.offer.driver_id) }}</td>
+    <td>{{ label_of(m.offer.driver_id) }}</td>
+    <td>{{ pname(m.offer.origin) }} &rarr; {{ pname(m.offer.destination) }}{% if m.offer.tags %}<br><span class="muted">{{ m.offer.tags|sort|join(', ')|replace('_', ' ') }}</span>{% endif %}</td>
+    <td>{{ m.offer.departure|dt }}</td>
+    <td>{{ m.offer.seats_available }}</td>
+    <td>{{ m.detour_m|round|int }} m</td>
+    <td><b>{{ '%.2f'|format(m.score) }}</b></td>
+    <td>
+      <form method="post" action="{{ url_for('join', offer_id=m.offer.id) }}" class="inline">
+        <input type="hidden" name="csrf" value="{{ csrf() }}">
+        <input type="hidden" name="seats" value="{{ req.seats_needed }}">
+        <button type="submit">Request to join</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table></div>
+{% else %}
+  <div class="card">No matching rides right now. Try a wider time window or check back later.</div>
+{% endif %}
+{% endblock %}

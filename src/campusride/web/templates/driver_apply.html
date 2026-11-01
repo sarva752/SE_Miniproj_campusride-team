@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Become a driver - CampusRide{% endblock %}
+{% block content %}
+<h1>Become a driver</h1>
+{% if application %}
+  <div class="card">
+    <b>Your application:</b>
+    <span class="badge {{ 'good' if application.status == 'APPROVED' else ('bad' if application.status == 'REJECTED' else '') }}">{{ application.status }}</span>
+    <p class="muted">{{ application.model }} &middot; {{ application.reg_no }} &middot; {{ application.capacity }} seats</p>
+    {% if application.status == 'REJECTED' %}<p>Reason: {{ application.reason }}</p>{% endif %}
+    {% if application.status == 'APPROVED' %}<a class="btn" href="{{ url_for('offer_new') }}">Offer a ride</a>{% endif %}
+  </div>
+{% endif %}
+{% if not application or application.status == 'REJECTED' %}
+<div class="card" style="max-width:520px">
+  <form method="post">
+    <input type="hidden" name="csrf" value="{{ csrf() }}">
+    <label>Vehicle model</label><input name="model" required>
+    <label>Registration number</label><input name="reg_no" required>
+    <label>Seat capacity (including the driver)</label><input name="capacity" type="number" min="2" max="8" required>
+    <label>Licence number</label><input name="licence_no" required>
+    <p class="muted">An administrator reviews every application.</p>
+    <button type="submit">Submit application</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}
