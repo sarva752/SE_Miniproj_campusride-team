@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Admin - CampusRide{% endblock %}
+{% block content %}
+<h1>Admin</h1>
+<div class="stats">
+  {% for key, value in stats.items() %}<div class="card stat"><b>{{ value }}</b><span class="muted">{{ key|replace('_', ' ') }}</span></div>{% endfor %}
+</div>
+<p><a href="{{ url_for('admin_csv') }}">Download analytics (CSV)</a></p>
+
+<h2>Driver applications</h2>
+{% if pending %}
+<div class="scroll"><table>
+  <tr><th>User</th><th>Vehicle</th><th>Licence</th><th>Decision</th></tr>
+  {% for a in pending %}
+  <tr><td>{{ name_of(a.user_id) }}</td><td>{{ a.model }}, {{ a.reg_no }}, {{ a.capacity }} seats</td><td>{{ a.licence_no }}</td>
+    <td>
+      <form method="post" action="{{ url_for('admin_review', user_id=a.user_id) }}" class="inline">
+        <input type="hidden" name="csrf" value="{{ csrf() }}"><input type="hidden" name="decision" value="approve"><button type="submit">Approve</button>
+      </form>
+      <form method="post" action="{{ url_for('admin_review', user_id=a.user_id) }}" class="inline">
+        <input type="hidden" name="csrf" value="{{ csrf() }}"><input type="hidden" name="decision" value="reject">
+        <input name="reason" placeholder="Reason for rejecting"><button class="danger" type="submit">Reject</button>
+      </form>
+    </td></tr>
+  {% endfor %}
+</table></div>
+{% else %}<div class="card muted">No pending applications.</div>{% endif %}
+
+<h2>Users</h2>
+<div class="scroll"><table>
+  <tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Moderation</th></tr>
+  {% for u in users %}
+  <tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td>{{ u.role.value|lower }}</td><td><span class="badge {{ 'bad' if u.status.value == 'SUSPENDED' }}">{{ u.status.value|lower }}</span></td>
+    <td>{% if u.role != Role.ADMIN and u.status.value != 'SUSPENDED' %}
+      <form method="post" action="{{ url_for('admin_suspend', user_id=u.id) }}" class="inline">
+        <input type="hidden" name="csrf" value="{{ csrf() }}"><input name="reason" placeholder="Reason" required><button class="danger" type="submit">Suspend</button>
+      </form>{% endif %}</td></tr>
+  {% endfor %}
+</table></div>
+
+<h2>Settings</h2>
+<div class="card">
+  {% for key in ('match_radius_m', 'request_expiry_min', 'rating_window_days') %}
+  <form method="post" action="{{ url_for('admin_config') }}" class="inline">
+    <input type="hidden" name="csrf" value="{{ csrf() }}"><input type="hidden" name="key" value="{{ key }}">
+    <label style="margin:0; min-width:170px">{{ key|replace('_', ' ') }}</label><input name="value" type="number" value="{{ config[key] }}"><button class="secondary" type="submit">Save</button>
+  </form><br>
+  {% endfor %}
+  <p class="muted">Only the match radius is used by this UI right now; the other values are stored and logged.</p>
+</div>
+
+<h2>Reports and flagged ratings</h2>
+<div class="card">
+  {% if reports %}{% for reporter, target, reason in reports %}<p>{{ name_of(reporter) }} reported {{ name_of(target) }}: {{ reason }}</p>{% endfor %}{% else %}<p class="muted">No user reports.</p>{% endif %}
+  {% if flagged %}<p class="muted">{{ flagged|length }} rating comment(s) flagged.</p>{% endif %}
+</div>
+
+<h2>Audit log</h2>
+<div class="scroll"><table>
+  <tr><th>When</th><th>Actor</th><th>Action</th><th>Detail</th></tr>
+  {% for when, actor, action, detail in audit %}<tr><td>{{ when|dt }}</td><td>{{ name_of(actor) }}</td><td>{{ action }}</td><td>{{ detail }}</td></tr>
+  {% else %}<tr><td colspan="4" class="muted">Nothing logged yet.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

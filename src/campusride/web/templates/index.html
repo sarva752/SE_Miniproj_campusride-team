@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% if me %}
+  <h1>Hello, {{ me.name }}</h1>
+  <div class="grid">
+    <a class="card" href="{{ url_for('request_new') }}"><h2>Find a ride</h2><p class="muted">Post a request and see ranked matches.</p></a>
+    <a class="card" href="{{ url_for('offer_new') }}"><h2>Offer a ride</h2><p class="muted">Approved drivers can post a trip.</p></a>
+    <a class="card" href="{{ url_for('rides') }}"><h2>My rides</h2><p class="muted">Bookings, requests and ride controls.</p></a>
+    <a class="card" href="{{ url_for('history') }}"><h2>History &amp; ratings</h2><p class="muted">Past rides and the ratings you can give.</p></a>
+  </div>
+  {% if me.role == Role.RIDER %}
+    <div class="card"><b>Want to drive?</b> <a href="{{ url_for('driver_apply') }}">Apply to become a driver</a>.</div>
+  {% endif %}
+{% else %}
+  <div class="card">
+    <h1>Share rides across campus</h1>
+    <p>Register with your institutional email, find a ride that matches your route and time, or offer seats on yours.</p>
+    <a class="btn" href="{{ url_for('register') }}">Create an account</a>
+    <a class="btn secondary" href="{{ url_for('login') }}">Log in</a>
+  </div>
+{% endif %}
+{% endblock %}
