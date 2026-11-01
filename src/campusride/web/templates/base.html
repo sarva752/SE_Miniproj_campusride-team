@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}CampusRide{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="{{ url_for('index') }}">CampusRide</a>
+  <nav>
+    {% if me %}
+      <a href="{{ url_for('request_new') }}">Find a ride</a>
+      <a href="{{ url_for('offer_new') }}">Offer a ride</a>
+      <a href="{{ url_for('rides') }}">My rides</a>
+      <a href="{{ url_for('history') }}">History</a>
+      <a href="{{ url_for('notifications') }}">Notifications{% if note_count %} <span class="badge">{{ note_count }}</span>{% endif %}</a>
+      {% if me.role == Role.ADMIN %}<a href="{{ url_for('admin_home') }}">Admin</a>{% endif %}
+      <span class="who">{{ me.name }} ({{ me.role.value|lower }})
+        <form method="post" action="{{ url_for('logout') }}" class="inline">
+          <input type="hidden" name="csrf" value="{{ csrf() }}"><button class="secondary" type="submit">Log out</button>
+        </form></span>
+    {% else %}
+      <a href="{{ url_for('login') }}">Log in</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </nav>
+</header>
+<main>
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="flash {{ category }}">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
