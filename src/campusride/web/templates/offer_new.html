@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Offer a ride - CampusRide{% endblock %}
+{% block content %}
+<h1>Offer a ride</h1>
+<div class="card" style="max-width:620px">
+  <form method="post">
+    <input type="hidden" name="csrf" value="{{ csrf() }}">
+    <div class="row">
+      <div><label>From</label><select name="origin">{% for p in places %}<option>{{ p }}</option>{% endfor %}</select></div>
+      <div><label>To</label><select name="destination">{% for p in places %}<option {{ 'selected' if loop.last }}>{{ p }}</option>{% endfor %}</select></div>
+    </div>
+    <div class="row">
+      <div><label>Departure</label><input name="departure" type="datetime-local" required></div>
+      <div><label>Seats offered (1 to {{ capacity - 1 }})</label><input name="seats" type="number" min="1" max="{{ capacity - 1 }}" value="1" required></div>
+    </div>
+    <label>Ride tags</label>
+    {% for t in tags %}<label class="check"><input type="checkbox" name="tags" value="{{ t }}">{{ t|replace('_', ' ') }}</label>{% endfor %}
+    <p><button type="submit">Post offer</button></p>
+  </form>
+</div>
+{% endblock %}

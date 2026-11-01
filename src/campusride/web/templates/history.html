@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}History - CampusRide{% endblock %}
+{% block content %}
+<h1>Ride history &amp; ratings</h1>
+<div class="card">
+  Your rating: <b>{% if count %}{{ average }} ({{ count }} rating{{ 's' if count != 1 }}){% else %}no ratings yet{% endif %}</b>
+  <form method="get" class="inline" style="margin-left:16px">
+    <select name="role"><option value="">Any role</option><option value="rider" {{ 'selected' if role == 'rider' }}>As rider</option><option value="driver" {{ 'selected' if role == 'driver' }}>As driver</option></select>
+    <select name="status"><option value="">Any status</option>{% for s in statuses %}<option value="{{ s.value }}" {{ 'selected' if status == s }}>{{ s.value|lower }}</option>{% endfor %}</select>
+    <button class="secondary" type="submit">Filter</button>
+  </form>
+</div>
+{% if rows %}
+<div class="scroll"><table>
+  <tr><th>Ride</th><th>Departed</th><th>With</th><th>Status</th><th>Rate</th></tr>
+  {% for b in rows %}{% set o = offers[b.offer_id] %}
+  <tr>
+    <td>{{ pname(o.origin) }} &rarr; {{ pname(o.destination) }}</td><td>{{ b.departure|dt }}</td>
+    <td>{{ name_of(b.driver_id if b.rider_id == me.id else b.rider_id) }}<br><span class="muted">you were the {{ 'rider' if b.rider_id == me.id else 'driver' }}</span></td>
+    <td><span class="badge">{{ b.status.value }}</span></td>
+    <td>
+      {% if b.status == BookingStatus.COMPLETED %}
+      <form method="post" action="{{ url_for('rate', booking_id=b.id) }}" class="inline">
+        <input type="hidden" name="csrf" value="{{ csrf() }}">
+        <select name="stars">{% for s in (5, 4, 3, 2, 1) %}<option value="{{ s }}">{{ s }} &#9733;</option>{% endfor %}</select>
+        <input name="comment" maxlength="300" placeholder="Comment (optional)"><button type="submit">Rate</button>
+      </form>
+      {% else %}-{% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table></div>
+{% else %}<div class="card muted">No finished rides yet.</div>{% endif %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Chat - CampusRide{% endblock %}
+{% block content %}
+<h1>Chat with {{ name_of(partner) }}</h1>
+<p class="muted">Booking {{ booking.id }} &middot; <span class="badge">{{ booking.status.value }}</span> &middot; <a href="{{ url_for('rides') }}">Back to my rides</a></p>
+<div class="card">
+  <div class="chat">
+    {% for m in messages %}
+      <div class="bubble {{ 'mine' if m.sender_id == me.id }}">
+        <small>{{ name_of(m.sender_id) }} &middot; {{ m.sent_at|dt }}</small>
+        {# the chat service HTML-escapes text before storing it, so it is safe to print as is #}
+        {{ m.content|safe }}
+      </div>
+    {% else %}<p class="muted">No messages yet.</p>{% endfor %}
+  </div>
+  {% if blocked %}
+    <p class="muted">Messaging is blocked between you and this user.</p>
+  {% else %}
+  <form method="post" class="inline" style="width:100%">
+    <input type="hidden" name="csrf" value="{{ csrf() }}"><input type="hidden" name="action" value="send">
+    <input name="content" maxlength="1000" placeholder="Type a message" style="flex:1" required><button type="submit">Send</button>
+  </form>
+  {% endif %}
+</div>
+<div class="card">
+  <form method="post" class="inline">
+    <input type="hidden" name="csrf" value="{{ csrf() }}"><input type="hidden" name="action" value="report">
+    <input name="reason" placeholder="Why are you reporting this user?" required><button class="secondary" type="submit">Report</button>
+  </form>
+  {% if not blocked %}
+  <form method="post" class="inline">
+    <input type="hidden" name="csrf" value="{{ csrf() }}"><input type="hidden" name="action" value="block">
+    <button class="danger" type="submit">Block user</button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}
