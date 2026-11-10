@@ -7,3 +7,10 @@ venv/
 .vscode/
 *.egg-info/
 .env
+
+# Test and coverage build artefacts (reports are committed to docs/ instead)
+build/
+.coverage
+coverage.xml
+docs/coverage_html/
+docs/_coverage.json
