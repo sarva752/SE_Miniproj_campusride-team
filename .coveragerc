@@ -1,0 +1,26 @@
+# Coverage configuration for CampusRide.
+# Used by CI (`pytest --cov`) and mirrored by scripts/measure_coverage.py,
+# the offline fallback used when coverage.py cannot be installed.
+
+[run]
+branch = True
+source = src/campusride
+omit =
+    */__main__.py
+
+[report]
+precision = 1
+show_missing = True
+skip_covered = False
+# The service layer must stay above the SRS target for CRS-NF-010.
+fail_under = 70
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+    raise NotImplementedError
+
+[html]
+directory = docs/coverage_html
+
+[xml]
+output = docs/coverage.xml

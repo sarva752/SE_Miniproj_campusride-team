@@ -51,7 +51,7 @@ def make_driver(app):
     return driver
 
 
-def test_landing_page_and_login_wall(app):
+def test_landing_page_and_login_wall(app):  # TC-Web-01
     client = app.test_client()
     assert client.get("/").status_code == 200
     for url in ("/rides", "/history", "/offers/new", "/requests/new", "/notifications", "/admin"):
@@ -59,36 +59,36 @@ def test_landing_page_and_login_wall(app):
         assert resp.status_code == 302 and "/login" in resp.headers["Location"]
 
 
-def test_register_verify_login_flow(app):
+def test_register_verify_login_flow(app):  # TC-Web-02
     client = signup(app, "asha@example.edu", "Asha")
     page = client.get("/").get_data(as_text=True)
     assert "Hello, Asha" in page
 
 
-def test_registration_rejects_non_institutional_email(app):
+def test_registration_rejects_non_institutional_email(app):  # TC-Web-02
     page = post(app.test_client(), "/register",
                 {"email": "me@gmail.com", "name": "Me", "password": PASSWORD}).get_data(as_text=True)
     assert "institutional email" in page
 
 
-def test_wrong_password_shows_generic_error(app):
+def test_wrong_password_shows_generic_error(app):  # TC-Web-02
     signup(app, "asha@example.edu", "Asha")
     page = post(app.test_client(), "/login", {"email": "asha@example.edu", "password": "nope1234"}).get_data(as_text=True)
     assert "Invalid credentials" in page
 
 
-def test_post_without_csrf_token_is_rejected(app):
+def test_post_without_csrf_token_is_rejected(app):  # TC-Web-03, TC-Sec-06
     assert app.test_client().post("/login", data={"email": "a@example.edu", "password": "x"}).status_code == 400
 
 
-def test_rider_cannot_open_admin_or_post_offers(app):
+def test_rider_cannot_open_admin_or_post_offers(app):  # TC-Web-04, TC-Sec-04
     rider = signup(app, "asha@example.edu", "Asha")
     assert rider.get("/admin").status_code == 403
     resp = rider.get("/offers/new")
     assert resp.status_code == 302 and "/driver/apply" in resp.headers["Location"]
 
 
-def test_full_rider_and_driver_journey(app):
+def test_full_rider_and_driver_journey(app):  # TC-Web-05
     driver = make_driver(app)
     rider = signup(app, "asha@example.edu", "Asha")
     now = datetime.now()
@@ -121,7 +121,7 @@ def test_full_rider_and_driver_journey(app):
     assert "request accepted" in rider.get("/notifications").get_data(as_text=True)
 
 
-def test_chat_escapes_html(app):
+def test_chat_escapes_html(app):  # TC-Web-06, TC-Sec-06
     driver = make_driver(app)
     rider = signup(app, "asha@example.edu", "Asha")
     dep = (datetime.now() + timedelta(hours=2)).replace(second=0, microsecond=0)
@@ -133,7 +133,7 @@ def test_chat_escapes_html(app):
     assert "&lt;script&gt;" in page
 
 
-def test_admin_dashboard_suspend_and_csv(app):
+def test_admin_dashboard_suspend_and_csv(app):  # TC-Web-07
     rider = signup(app, "asha@example.edu", "Asha")
     admin = admin_client(app)
     page = admin.get("/admin").get_data(as_text=True)
@@ -146,14 +146,14 @@ def test_admin_dashboard_suspend_and_csv(app):
     assert "USER_SUSPENDED" in admin.get("/admin").get_data(as_text=True)
 
 
-def test_admin_can_change_match_radius(app):
+def test_admin_can_change_match_radius(app):  # TC-Web-08
     admin = admin_client(app)
     assert "Setting saved" in post(admin, "/admin/config", {"key": "match_radius_m", "value": "500"}).get_data(as_text=True)
     assert app.config["STATE"].admin.config["match_radius_m"] == 500
     assert "Invalid value" in post(admin, "/admin/config", {"key": "match_radius_m", "value": "5"}).get_data(as_text=True)
 
 
-def test_every_page_renders_for_each_role(app):
+def test_every_page_renders_for_each_role(app):  # TC-Web-09
     driver = make_driver(app)
     rider = signup(app, "asha@example.edu", "Asha")
     admin = admin_client(app)
@@ -167,7 +167,7 @@ def test_every_page_renders_for_each_role(app):
     assert rider.get("/nope").status_code == 404
 
 
-def test_any_edu_domain_is_accepted_but_other_domains_are_not():
+def test_any_edu_domain_is_accepted_but_other_domains_are_not():  # TC-Web-10
     strict = create_app({"TESTING": True, "SECRET_KEY": "t"})
     page = post(strict.test_client(), "/register",
                 {"email": "me@pes.edu", "name": "Me", "password": PASSWORD}).get_data(as_text=True)

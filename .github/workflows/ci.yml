@@ -23,7 +23,28 @@ jobs:
           python-version: "3.12"
 
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run tests
         run: pytest -v
+
+      - name: Measure statement and branch coverage
+        # .coveragerc sets branch = True and fail_under = 70 (CRS-NF-010),
+        # so this step fails the build if coverage drops below the target.
+        run: |
+          coverage run -m pytest -q
+          coverage report
+          coverage html
+          coverage xml
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            docs/coverage_html/
+            docs/coverage.xml
+          if-no-files-found: ignore
