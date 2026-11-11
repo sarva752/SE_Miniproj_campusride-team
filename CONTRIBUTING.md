@@ -73,7 +73,7 @@ to explain your own code and walk through your PR.
 | `notifications.py` | `feature/notifications` | CRS-F-060..062 | Sarva Sandip |
 | `admin.py` | `feature/admin-moderation` | CRS-F-006, 070..074 | T Surya |
 | `demo.py` | `feature/end-to-end-demo` | integration of all the above | T Surya |
-| `web/` (Flask UI) | `feature/ui` | presentation layer, Sprint-2 | Sarva Sandip |
+| `web/` (Flask UI) | `feature/ui` | presentation layer, Sprint-2 | Sai Likhith |
 
 The `starter_patches/` folder that seeded these branches was removed once every feature was
 merged (PR #12).
