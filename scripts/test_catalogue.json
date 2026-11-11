@@ -1,0 +1,706 @@
+{
+ "TC-Admin-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-070",
+  "title": "Approve and reject driver applications",
+  "type": "Functional"
+ },
+ "TC-Admin-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-071",
+  "title": "Review report and warn user",
+  "type": "Functional"
+ },
+ "TC-Admin-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-071",
+  "title": "Suspend user: login blocked and open items removed",
+  "type": "Functional"
+ },
+ "TC-Admin-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-072",
+  "title": "Change configuration values and verify behaviour",
+  "type": "Functional"
+ },
+ "TC-Admin-05": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Low",
+  "req": "CRS-F-073",
+  "title": "Analytics figures and CSV export",
+  "type": "Functional"
+ },
+ "TC-Admin-06": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-074",
+  "title": "Audit entries for security and admin actions",
+  "type": "Functional"
+ },
+ "TC-Auth-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-001",
+  "title": "Register with valid institutional email and verify OTP",
+  "type": "Functional"
+ },
+ "TC-Auth-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-001",
+  "title": "Reject non-institutional email, wrong OTP and expired OTP",
+  "type": "Functional"
+ },
+ "TC-Auth-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-002",
+  "title": "Login with valid and invalid credentials",
+  "type": "Functional"
+ },
+ "TC-Auth-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-002",
+  "title": "Session expires after 30 minutes of inactivity",
+  "type": "Functional"
+ },
+ "TC-Auth-05": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-003",
+  "title": "Lock account after 5 failed logins and verify audit entry",
+  "type": "Functional"
+ },
+ "TC-Auth-06": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-004",
+  "title": "Password reset link: valid, expired and reused cases",
+  "type": "Functional"
+ },
+ "TC-Book-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-030",
+  "title": "Send join request; reject duplicate",
+  "type": "Functional"
+ },
+ "TC-Book-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-031",
+  "title": "Driver accepts and rejects requests; non-owner is blocked",
+  "type": "Functional"
+ },
+ "TC-Book-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-032",
+  "title": "Acceptance reduces seats, notifies both and reveals details",
+  "type": "Functional"
+ },
+ "TC-Book-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-033",
+  "title": "Cancel confirmed booking and restore seats",
+  "type": "Functional"
+ },
+ "TC-Book-05": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-033",
+  "title": "Flag repeated late cancellations",
+  "type": "Functional"
+ },
+ "TC-Book-06": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-034",
+  "title": "Ride lifecycle transitions and invalid transitions",
+  "type": "Functional"
+ },
+ "TC-Book-07": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-035",
+  "title": "Pending requests expire on timeout and at departure",
+  "type": "Functional"
+ },
+ "TC-Book-08": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-036",
+  "title": "Generate and expire trusted-contact share link",
+  "type": "Functional"
+ },
+ "TC-Compat-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-NF-009",
+  "title": "Cross-browser and responsive layout matrix",
+  "type": "Compatibility"
+ },
+ "TC-Hist-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-050",
+  "title": "View and filter ride history; no access to other users' history",
+  "type": "Functional"
+ },
+ "TC-Maint-01": {
+  "added": "Part-1",
+  "level": "Unit / Static",
+  "priority": "Medium",
+  "req": "CRS-NF-010",
+  "title": "Unit-test coverage and OpenAPI completeness check",
+  "type": "Maintainability"
+ },
+ "TC-Match-01": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "High",
+  "req": "CRS-F-020",
+  "title": "Return offers that satisfy distance, time, seat and direction rules",
+  "type": "Functional"
+ },
+ "TC-Match-02": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "High",
+  "req": "CRS-F-020",
+  "title": "Exclude offers failing each rule (no seats, out of window, wrong direction, too far)",
+  "type": "Functional"
+ },
+ "TC-Match-03": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "High",
+  "req": "CRS-F-021",
+  "title": "Verify ranking order and score formula on a fixed data set",
+  "type": "Functional"
+ },
+ "TC-Match-04": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "Medium",
+  "req": "CRS-F-022",
+  "title": "New compatible offer triggers notification within 60 s",
+  "type": "Functional"
+ },
+ "TC-Match-05": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "Low",
+  "req": "CRS-F-023",
+  "title": "Filter and sort match results",
+  "type": "Functional"
+ },
+ "TC-Match-06": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "High",
+  "req": "CRS-F-024",
+  "title": "Concurrent acceptance test: no overbooking",
+  "type": "Functional / Concurrency"
+ },
+ "TC-Match-07": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "Medium",
+  "req": "CRS-F-025",
+  "title": "Driver views compatible requests and sends invitation",
+  "type": "Functional"
+ },
+ "TC-Msg-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-040",
+  "title": "Chat allowed only for users with a shared booking",
+  "type": "Functional"
+ },
+ "TC-Msg-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-041",
+  "title": "Delivery latency, persistence and offline notification",
+  "type": "Functional"
+ },
+ "TC-Msg-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-042",
+  "title": "Block and report user from chat",
+  "type": "Functional"
+ },
+ "TC-Msg-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Low",
+  "req": "CRS-F-043",
+  "title": "Chat becomes read-only 24 h after ride end",
+  "type": "Functional"
+ },
+ "TC-Msg-05": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-044",
+  "title": "Over-length and script-injection messages",
+  "type": "Functional"
+ },
+ "TC-Notif-01": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "High",
+  "req": "CRS-F-060",
+  "title": "Notification generated for every listed event",
+  "type": "Functional"
+ },
+ "TC-Notif-02": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "Medium",
+  "req": "CRS-F-061",
+  "title": "Departure reminder timing",
+  "type": "Functional"
+ },
+ "TC-Notif-03": {
+  "added": "Part-1",
+  "level": "Integration",
+  "priority": "Low",
+  "req": "CRS-F-062",
+  "title": "Per-channel and per-category preferences",
+  "type": "Functional"
+ },
+ "TC-Ops-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-NF-011",
+  "title": "Retention and archival job",
+  "type": "Operational"
+ },
+ "TC-Perf-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-NF-001",
+  "title": "Match search response time under 500 users / 5,000 offers",
+  "type": "Performance"
+ },
+ "TC-Perf-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-NF-002",
+  "title": "API latency and page-load time",
+  "type": "Performance"
+ },
+ "TC-Perf-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-NF-003",
+  "title": "Load test at 1,000 concurrent sessions",
+  "type": "Performance"
+ },
+ "TC-Prof-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-005",
+  "title": "Create/edit profile and verify phone-number visibility rules",
+  "type": "Functional"
+ },
+ "TC-Prof-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-006",
+  "title": "Driver application, approval and offer-posting permission",
+  "type": "Functional"
+ },
+ "TC-Rate-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-051",
+  "title": "Submit valid rating after completion",
+  "type": "Functional"
+ },
+ "TC-Rate-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-051",
+  "title": "Reject duplicate, late and non-participant ratings",
+  "type": "Functional"
+ },
+ "TC-Rate-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-052",
+  "title": "Average rating calculation and 'New' label",
+  "type": "Functional"
+ },
+ "TC-Rate-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Low",
+  "req": "CRS-F-053",
+  "title": "Rating immutability and comment flagging",
+  "type": "Functional"
+ },
+ "TC-Rel-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-NF-005",
+  "title": "Backup restore drill and confirmed-booking durability",
+  "type": "Reliability"
+ },
+ "TC-Rel-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-NF-004",
+  "title": "Uptime and health-check monitoring verification",
+  "type": "Reliability"
+ },
+ "TC-Ride-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-010",
+  "title": "Create valid ride offer (single and recurring)",
+  "type": "Functional"
+ },
+ "TC-Ride-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-010",
+  "title": "Reject offer with past time, zero seats or seats above capacity",
+  "type": "Functional"
+ },
+ "TC-Ride-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-011",
+  "title": "Edit/cancel an offer that has confirmed riders",
+  "type": "Functional"
+ },
+ "TC-Ride-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-012",
+  "title": "Create valid ride request and trigger matching",
+  "type": "Functional"
+ },
+ "TC-Ride-05": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-013",
+  "title": "Edit/cancel ride request with pending join requests",
+  "type": "Functional"
+ },
+ "TC-Ride-06": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-014",
+  "title": "Select location by landmark, pin and search; reject out-of-area point",
+  "type": "Functional"
+ },
+ "TC-Ride-07": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-015",
+  "title": "Reject overlapping confirmed rides for the same user",
+  "type": "Functional"
+ },
+ "TC-Sec-01": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-NF-006",
+  "title": "Privacy checklist, data export and account deletion",
+  "type": "Security"
+ },
+ "TC-Sec-02": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-001",
+  "title": "TLS configuration scan and HSTS check",
+  "type": "Security"
+ },
+ "TC-Sec-03": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-002",
+  "title": "Password hashing, policy and log inspection",
+  "type": "Security"
+ },
+ "TC-Sec-04": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-003",
+  "title": "RBAC and IDOR (cross-user access) tests",
+  "type": "Security"
+ },
+ "TC-Sec-05": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-004",
+  "title": "Location and contact privacy before/after confirmation",
+  "type": "Security"
+ },
+ "TC-Sec-06": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-005",
+  "title": "Injection, XSS and CSRF testing",
+  "type": "Security"
+ },
+ "TC-Sec-07": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-SR-006",
+  "title": "Rate limits for login, OTP and chat",
+  "type": "Security"
+ },
+ "TC-Sec-08": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-007",
+  "title": "Token expiry, revocation and cookie flags",
+  "type": "Security"
+ },
+ "TC-Sec-09": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-SR-008",
+  "title": "Encryption at rest of sensitive fields",
+  "type": "Security"
+ },
+ "TC-Sec-10": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-009",
+  "title": "Audit log completeness and immutability",
+  "type": "Security"
+ },
+ "TC-Sec-11": {
+  "added": "Part-1",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-SR-010",
+  "title": "File upload validation and access control",
+  "type": "Security"
+ },
+ "TC-UX-01": {
+  "added": "Part-1",
+  "level": "Acceptance",
+  "priority": "Medium",
+  "req": "CRS-NF-007",
+  "title": "Task-time and SUS usability study",
+  "type": "Usability / Accessibility"
+ },
+ "TC-UX-02": {
+  "added": "Part-1",
+  "level": "Acceptance",
+  "priority": "Medium",
+  "req": "CRS-NF-008",
+  "title": "WCAG 2.1 AA accessibility audit",
+  "type": "Usability / Accessibility"
+ },
+ "TC-Web-01": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-003",
+  "title": "Unauthenticated access to protected pages redirects to login",
+  "type": "Security"
+ },
+ "TC-Web-02": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-001",
+  "title": "Register, verify OTP and log in through the web UI",
+  "type": "Functional"
+ },
+ "TC-Web-03": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-005",
+  "title": "Every form POST requires a valid CSRF token",
+  "type": "Security"
+ },
+ "TC-Web-04": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-003",
+  "title": "Rider cannot open admin pages or post offers without approval",
+  "type": "Security"
+ },
+ "TC-Web-05": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-032",
+  "title": "Complete rider/driver journey through the UI: offer, match, join, accept, chat, start, complete, rate",
+  "type": "Functional"
+ },
+ "TC-Web-06": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-005",
+  "title": "Chat content is HTML-escaped on render (stored XSS)",
+  "type": "Security"
+ },
+ "TC-Web-07": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-071",
+  "title": "Admin dashboard: review, suspend, CSV export and their guards",
+  "type": "Functional"
+ },
+ "TC-Web-08": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-072",
+  "title": "Admin changes the match radius from the dashboard",
+  "type": "Functional"
+ },
+ "TC-Web-09": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-NF-007",
+  "title": "Every page renders for each role; bad query parameters are ignored",
+  "type": "Usability"
+ },
+ "TC-Web-10": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-001",
+  "title": "Institutional email policy enforced at the registration form",
+  "type": "Functional"
+ },
+ "TC-Web-11": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-004",
+  "title": "IDOR: a third user cannot reach another pair's booking, chat or match list",
+  "type": "Security"
+ },
+ "TC-Web-12": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-014",
+  "title": "Form validation: unknown place, same origin/destination, non-numeric and malformed values",
+  "type": "Functional"
+ },
+ "TC-Web-13": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-033",
+  "title": "Reject and cancel a booking from the UI; seats restored and both users notified",
+  "type": "Functional"
+ },
+ "TC-Web-14": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "Medium",
+  "req": "CRS-F-015",
+  "title": "UI refuses a second confirmed ride in an overlapping window",
+  "type": "Functional"
+ },
+ "TC-Web-15": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-F-042",
+  "title": "Block and report a chat partner from the chat page",
+  "type": "Functional"
+ },
+ "TC-Web-16": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "Low",
+  "req": "CRS-F-062",
+  "title": "Per-channel notification preferences saved from the UI",
+  "type": "Functional"
+ },
+ "TC-Web-17": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-007",
+  "title": "Logout clears the session and re-applies the login wall",
+  "type": "Security"
+ },
+ "TC-Web-18": {
+  "added": "Sprint-2",
+  "level": "System",
+  "priority": "High",
+  "req": "CRS-SR-002",
+  "title": "Production configuration: no seeded admin and no OTP shown on screen",
+  "type": "Security"
+ }
+}
